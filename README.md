@@ -27,6 +27,16 @@ A solução é composta por dois microserviços principais, integrados por um AP
 6. O microserviço de estoque atualiza os dados conforme necessário.
 7. Todas as informações são persistidas em um banco de dados relacional.
 
+## Observações Importantes
+
+- Os microserviços utilizam bancos diferentes:
+  - `Estoque`: PostgreSQL (`estoque-db`)
+  - `Vendas`: SQL Server (`sqlserver_vendas`)
+- Certifique-se de que cada microserviço está apontando para o banco correto em sua string de conexão.
+- Mapeamento de portas:
+  - `sqlserver_estoque`: porta **1433**
+  - `sqlserver_vendas`: porta **1434**
+
 ## 🛠️ Tecnologias Utilizadas
 
 - **.NET Core** – Framework principal para desenvolvimento dos microserviços.

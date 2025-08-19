@@ -1,0 +1,87 @@
+# Observações importantes:
+# • Os microserviços usam PostgreSQL e SQL Server simultaneamente.
+#   - Estoque usa PostgreSQL (estoque-db)
+#   - Vendas usa SQL Server (sqlserver_vendas)
+# • Certifique-se de que cada microserviço está configurado para se conectar ao banco correto.
+# • Mapeamento de portas para SQL Server:
+#   - sqlserver_estoque: acessível pela porta 1433
+#   - sqlserver_vendas: acessível pela porta 1434
+  
+version: '3.8'
+
+services:
+  estoque:
+    build: ./microservico_estoque
+    ports:
+      - "5001:80"
+    depends_on:
+      - rabbitmq
+      - estoque-db
+      - sqlserver_estoque
+
+  vendas:
+    build: ./microservico_vendas
+    ports:
+      - "5002:80"
+    depends_on:
+      - rabbitmq
+      - vendas-db
+      - sqlserver_vendas
+
+  apigateway:
+    build: ./api-gateway/ApiGateway
+    ports:
+      - "5000:80"
+    depends_on:
+      - estoque
+      - vendas
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  estoque-db:
+    image: postgres
+    environment:
+      POSTGRES_DB: estoque
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+
+  vendas-db:
+    image: postgres
+    environment:
+      POSTGRES_DB: vendas
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+
+  sqlserver_estoque:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "SuaSenhaForte123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_estoque_data:/var/opt/mssql
+
+  sqlserver_vendas:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "SuaSenhaForte123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1434:1433"
+    volumes:
+      - sql_vendas_data:/var/opt/mssql
+
+volumes:
+  sql_estoque_data:
+  sql_vendas_data:
+   
+
+  
+  
+
+

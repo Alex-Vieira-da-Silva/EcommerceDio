@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ecommerce_microservico.microservico_estoque.Messaging.Events.RabbitMq
 {
-    public class ConsumirEstoque
+    public class ConsumirEstoque 
     {
         private readonly IModel _channel;
 

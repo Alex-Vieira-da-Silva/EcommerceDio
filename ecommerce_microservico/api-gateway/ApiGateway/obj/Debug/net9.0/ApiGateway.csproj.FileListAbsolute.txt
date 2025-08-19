@@ -48,3 +48,4 @@ C:\Users\alexv\OneDrive\Documentos\VsCode\Dio\Cursos\Dotnet\Desafio Avanade\Ecom
 C:\Users\alexv\OneDrive\Documentos\VsCode\Dio\Cursos\Dotnet\Desafio Avanade\EcommerceDio\ecommerce_microservico\api-gateway\ApiGateway\obj\Debug\net9.0\ApiGateway.genruntimeconfig.cache
 C:\Users\alexv\OneDrive\Documentos\VsCode\Dio\Cursos\Dotnet\Desafio Avanade\EcommerceDio\ecommerce_microservico\api-gateway\ApiGateway\obj\Debug\net9.0\ref\ApiGateway.dll
 C:\Users\alexv\OneDrive\Documentos\VsCode\Dio\Cursos\Dotnet\Desafio Avanade\EcommerceDio\ecommerce_microservico\api-gateway\ApiGateway\bin\Debug\net9.0\RabbitMQ.Client.dll
+C:\Users\alexv\OneDrive\Documentos\VsCode\Dio\Cursos\Dotnet\Desafio Avanade\EcommerceDio\ecommerce_microservico\api-gateway\ApiGateway\obj\Debug\net9.0\ApiGateway.sourcelink.json

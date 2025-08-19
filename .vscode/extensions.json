@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "ms-dotnettools.csharp",         // C# (IntelliSense, debugging, OmniSharp)
+    "ms-azuretools.vscode-docker",  // Docker (imagens, containers, compose)
+    "humao.rest-client",            // REST Client (testar APIs sem sair do editor)
+    "redhat.vscode-yaml",           // YAML (validação de ocelot.json e docker-compose.yml)
+    "ms-mssql.mssql"                // SQL Server (conexão direta, query editor)
+  ],
+  "unwantedRecommendations": []
+}
+

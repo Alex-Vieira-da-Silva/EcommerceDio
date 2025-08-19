@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ecommerce_microservico", "ecommerce_microservico", "{5BA77A71-1F47-6507-0C61-ECE4312E5755}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api-gateway", "api-gateway", "{E31E5141-9B03-D08E-96B0-7F0EDEC2FA5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "ecommerce_microservico\api-gateway\ApiGateway\ApiGateway.csproj", "{238FA01E-42ED-59D6-0A51-48E2273D19B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{238FA01E-42ED-59D6-0A51-48E2273D19B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{238FA01E-42ED-59D6-0A51-48E2273D19B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{238FA01E-42ED-59D6-0A51-48E2273D19B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{238FA01E-42ED-59D6-0A51-48E2273D19B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E31E5141-9B03-D08E-96B0-7F0EDEC2FA5A} = {5BA77A71-1F47-6507-0C61-ECE4312E5755}
+		{238FA01E-42ED-59D6-0A51-48E2273D19B3} = {E31E5141-9B03-D08E-96B0-7F0EDEC2FA5A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F41C9B8F-9ABB-4AD2-A761-500D36B671EA}
+	EndGlobalSection
+EndGlobal

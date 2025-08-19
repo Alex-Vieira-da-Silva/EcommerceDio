@@ -1,0 +1,30 @@
+{
+  // Formatar YAML no save
+  "editor.formatOnSave": true,
+
+  // Usar o formatador do Red Hat em arquivos YAML
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+
+  // Mapeamento de schemas para validação
+  "yaml.schemas": {
+    // Schema oficial do Docker Compose v3
+    "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": "docker-compose.yml",
+    // Schema Ocelot (se quiser apontar para um JSON schema local ou remoto)
+    "./api-gateway/ApiGateway/ocelot.schema.json": "ocelot.json"
+  },
+
+  // C# / OmniSharp: usar preview do SDK instalado localmente
+  "omnisharp.useGlobalMono": "never",
+  "omnisharp.useModernNet": true,
+
+  // Docker: abrir painel automaticamente ao detectar docker-compose
+  "docker.showExplorer": true,
+
+  // REST Client: salvar respostas em histórico
+  "rest-client.enableResponseHistory": true,
+
+  // SQL Server: conexões padrão (você pode sobrescrever via Command Palette)
+  "mssql.connections": []
+}

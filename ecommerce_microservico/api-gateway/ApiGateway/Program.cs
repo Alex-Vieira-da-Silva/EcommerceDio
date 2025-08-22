@@ -6,9 +6,6 @@ using RabbitMQ.Client.Events;
 using System.Text;
 using System.Text.Json;
 
-// Add the correct namespace for ConsumirEstoque if it exists, for example:
-// using ecommerce_microservico.microservico_estoque.Messaging.Consumers;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. Carregar configurações
@@ -17,7 +14,7 @@ builder.Configuration
     .AddJsonFile("ocelot.json",     optional: false, reloadOnChange: true);
 
 // 2. Registrar serviços de mensageria
-builder.Services.AddSingleton<IRabbitMqService, IRabbitMqService>();
+builder.Services.AddSingleton<IRabbitMqService, RabbitMqService>();
 
 // 3. Registrar Auth + Ocelot
 builder.Services
@@ -51,11 +48,39 @@ app.MapControllers();
 // 7. Use Ocelot como middleware final
 await app.UseOcelot();
 
+
+// Interface de serviço RabbitMQ
 internal interface IRabbitMqService
 {
+    void EnviarMensagem(string mensagem);
 }
 
-// Define ConsumirEstoque class if it does not exist
+
+// Implementação concreta do serviço RabbitMQ
+public class RabbitMqService : IRabbitMqService
+{
+    public void EnviarMensagem(string mensagem)
+    {
+        var factory = new ConnectionFactory() { HostName = "localhost" };
+        using var connection = factory.CreateConnection();
+        using var channel = connection.CreateModel();
+
+        channel.QueueDeclare(queue: "fila_exemplo",
+                             durable: false,
+                             exclusive: false,
+                             autoDelete: false,
+                             arguments: null);
+
+        var body = Encoding.UTF8.GetBytes(mensagem);
+        channel.BasicPublish(exchange: "",
+                             routingKey: "fila_exemplo",
+                             basicProperties: null,
+                             body: body);
+    }
+}
+
+
+// Classe para consumir mensagens de estoque
 public class ConsumirEstoque
 {
     private readonly IConfiguration _configuration;
@@ -67,11 +92,27 @@ public class ConsumirEstoque
 
     public void Start()
     {
-        // Implement the logic to start consuming messages from RabbitMQ
-        // Example:
-        // var factory = new ConnectionFactory() { HostName = "localhost" };
-        // using var connection = factory.CreateConnection();
-        // using var channel = connection.CreateModel();
-        // // Setup consumer logic here
+        // Exemplo de consumo de mensagens
+        var factory = new ConnectionFactory() { HostName = "localhost" };
+        var connection = factory.CreateConnection();
+        var channel = connection.CreateModel();
+
+        channel.QueueDeclare(queue: "fila_exemplo",
+                             durable: false,
+                             exclusive: false,
+                             autoDelete: false,
+                             arguments: null);
+
+        var consumer = new EventingBasicConsumer(channel);
+        consumer.Received += (model, ea) =>
+        {
+            var body = ea.Body.ToArray();
+            var mensagem = Encoding.UTF8.GetString(body);
+            Console.WriteLine($"Mensagem recebida: {mensagem}");
+        };
+
+        channel.BasicConsume(queue: "fila_exemplo",
+                             autoAck: true,
+                             consumer: consumer);
     }
 }
